@@ -1,7 +1,7 @@
 
 const s3UrlReducer = (state=[], action) => {
     if(action.type === 'SET_URL') {
-        return [...state, action.payload];
+        return action.payload;
     }
     return state;
 }

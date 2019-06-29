@@ -42,8 +42,8 @@ class SimpleUploader extends Component {
       var url = returnData.url;
       this.setState({url: url})
       this.props.dispatch({
-        type: 'SET_URL',
-        payload: url,
+        type: 'ADD_URL',
+        payload: {url: url},
       })
       console.log("Received a signed request " + signedRequest);
 
