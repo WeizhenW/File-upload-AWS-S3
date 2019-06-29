@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import './SimpleUploader.css';
+import { connect } from 'react-redux';
 
 class SimpleUploader extends Component {
     state = {
@@ -36,10 +37,16 @@ class SimpleUploader extends Component {
     .then(response => {
       console.log('in response');
       var returnData = response.data.data.returnData;
+      console.log(returnData);
       var signedRequest = returnData.signedRequest;
       var url = returnData.url;
       this.setState({url: url})
+      this.props.dispatch({
+        type: 'SET_URL',
+        payload: url,
+      })
       console.log("Received a signed request " + signedRequest);
+
       
      // Put the fileType in the headers for the upload
       var options = {
@@ -51,6 +58,7 @@ class SimpleUploader extends Component {
       .then(result => {
         console.log("Response from s3")
         this.setState({success: true});
+
       })
       .catch(error => {
         alert("error with put " + JSON.stringify(error));
@@ -81,4 +89,8 @@ class SimpleUploader extends Component {
     );
   }
 }
-export default SimpleUploader;
+
+const mapReduxStateToProps = reduxState => ({
+  reduxState,
+})
+export default connect(mapReduxStateToProps)(SimpleUploader);
