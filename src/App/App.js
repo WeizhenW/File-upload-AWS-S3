@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import SimpleUploader from '../SimpleUploader/SimpleUploader';
+import ImageDisplay from '../ImageDisplay/ImageDisplay';
 import './App.css';
 
 class App extends Component {
@@ -13,6 +14,7 @@ class App extends Component {
         </div>
         <div className='uploaderDiv'>
           <SimpleUploader />
+          <ImageDisplay />
         </div>
       </div>
     );
