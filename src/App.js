@@ -3,25 +3,22 @@ import axios from 'axios';
 
 
 class App extends Component {
-
     state = {
       success : false,
       url : "",
     }
 
     componentDidMount() {
-      axios.get('/api/hello')
+      axios.get('/api/s3')
       .then(
         (response) => {
           console.log('in get request', response);
         }
       ) 
-    
     }
   
   handleChange = (ev) => {
     this.setState({success: false, url : ""});
-    
   }
   // Perform the upload
   handleUpload = (ev) => {
