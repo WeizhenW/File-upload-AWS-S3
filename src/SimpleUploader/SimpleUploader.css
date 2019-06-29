@@ -1,0 +1,21 @@
+.chooseFile {
+    margin: 20px auto;
+    padding: 20px;
+    text-align: left;
+    border: solid grey 1px;
+    width: 60%;
+    
+}
+
+input {
+    font-size: 16px;
+}
+
+.uploadButton {
+    font-size: 16px;
+    background-color: teal;
+    color: white;
+    margin-top: 30px;
+    padding: 10px;
+    border-radius: 4px;
+}

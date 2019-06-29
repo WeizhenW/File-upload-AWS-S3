@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import './SimpleUploader.css';
 
-
-class App extends Component {
+class SimpleUploader extends Component {
     state = {
       success : false,
       url : "",
@@ -71,16 +71,14 @@ class App extends Component {
       </div>
     )
     return (
-      <div className="App">
-        <center>
-          <h1>UPLOAD A FILE</h1>
+      <div className="chooseFile">
+          <h3>PLEASE CHOOSE A FILE</h3>
           {this.state.success ? <Success_message/> : null}
           <input onChange={this.handleChange} ref={(ref) => { this.uploadInput = ref; }} type="file"/>
           <br/>
-          <button onClick={this.handleUpload}>UPLOAD</button>
-        </center>
+          <button className='uploadButton' onClick={this.handleUpload}>UPLOAD</button>
       </div>
     );
   }
 }
-export default App;
+export default SimpleUploader;
