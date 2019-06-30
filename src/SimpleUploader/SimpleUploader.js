@@ -8,15 +8,6 @@ class SimpleUploader extends Component {
       success : false,
       url : "",
     }
-
-    componentDidMount() {
-      axios.get('/api/s3')
-      .then(
-        (response) => {
-          console.log('in get request', response);
-        }
-      ) 
-    }
   
   handleChange = (ev) => {
     this.setState({success: false, url : ""});
@@ -35,16 +26,11 @@ class SimpleUploader extends Component {
       fileType : fileType
     })
     .then(response => {
-      console.log('in response');
       var returnData = response.data.data.returnData;
       console.log(returnData);
       var signedRequest = returnData.signedRequest;
       var url = returnData.url;
       this.setState({url: url})
-      this.props.dispatch({
-        type: 'ADD_URL',
-        payload: {url: url},
-      })
       console.log("Received a signed request " + signedRequest);
 
       
@@ -58,7 +44,11 @@ class SimpleUploader extends Component {
       .then(result => {
         console.log("Response from s3")
         this.setState({success: true});
-
+        //after image upload successful, trigger post route to add image url into database
+        this.props.dispatch({
+          type: 'ADD_URL',
+          payload: {url: this.state.url},
+        })
       })
       .catch(error => {
         alert("error with put " + JSON.stringify(error));

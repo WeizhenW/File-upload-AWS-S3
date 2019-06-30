@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 //aws-sdk
 const aws = require('aws-sdk'); 
-
 //env
 require('dotenv').config(); // Configure dotenv to load in the .env file
 
@@ -18,7 +17,7 @@ aws.config.update({
   secretAccessKey: process.env.secret,
 })
 //define bucket
-const S3_BUCKET = 'job-application-tracker';
+const S3_BUCKET = process.env.bucket_name;
 
 //post route
 router.post('/',(req,res) => {
@@ -29,7 +28,7 @@ router.post('/',(req,res) => {
     // Set up the payload of what we are sending to the S3 api
     const s3Params = {
       Bucket: S3_BUCKET,
-      Key: fileName,
+      Key: `test_folder/${Math.random() * 1000}_${fileName}.${fileType}`,
       Expires: 500,
       ContentType: fileType,
       ACL: 'public-read',
@@ -44,8 +43,9 @@ router.post('/',(req,res) => {
 // Data payload of what we are sending back, the url of the signedRequest and a URL where we can access the content after its saved. 
   const returnData = {
         signedRequest: data,
-        url: `https://${S3_BUCKET}.s3.amazonaws.com/${fileName}`
+        url: `https://${S3_BUCKET}.s3.amazonaws.com/${s3Params.Key}`
       };
+      console.log(data);
       // Send it all back
       res.json({success:true, data:{returnData}});
     });

@@ -8,12 +8,9 @@ function* postUrl(action) {
 
 function* fetchUrl() {
     const imageResponse = yield axios.get('/api/image');
-    console.log('image array', imageResponse.data);
+    console.log('image array', imageResponse);
     yield put({type: 'SET_URL', payload: imageResponse.data});
 }
-
-
-
 
 //watcher saga
 function* watcherSaga() {
